@@ -20,7 +20,7 @@
                 <mat-form-field appearance="outline" class="full-width register-outline-field">
                     <mat-icon matIconPrefix class="material-icons-outlined">mail</mat-icon>
                     <input matInput formControlName="email" placeholder="beispiel@email.com" type="email"
-                        style="color: black !important;">
+                        style="color: black !important;" autocomplete="current-username">
                     <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email eingeben</mat-error>
                     <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Richtige Email eingeben</mat-error>
                 </mat-form-field>
@@ -28,7 +28,7 @@
                 <mat-form-field appearance="outline" class="full-width register-outline-field">
                     <mat-icon matIconPrefix class="material-icons-outlined">lock</mat-icon>
                     <input matInput placeholder="Password" formControlName="password" type="password" style="
-                color: black !important;">
+                color: black !important;" autocomplete="current-password">
                     <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password eingeben</mat-error>
                     <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">Mindestens 6 Zeichen
                         eingeben</mat-error>

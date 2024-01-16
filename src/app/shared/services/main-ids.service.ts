@@ -6,6 +6,6 @@ import { Injectable } from '@angular/core';
 export class MainIdsService {
 
   guestId = '';
-  mainChannelId = 'IvQ6DpGsvMfkaELq2m82';
+  mainChannelId = 'CQ1j8BozhH64NQT0SCX7';
   constructor() { }
 }

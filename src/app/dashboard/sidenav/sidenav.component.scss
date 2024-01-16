@@ -46,7 +46,7 @@ mat-drawer {
   width: fit-content;
   padding: 20px 30px;
   background-color: white;
-  height: calc(100% - 40px);
+  height: calc(100%);
   width: 250px;
 }
 
@@ -401,7 +401,7 @@ app-search-bar {
 @media (max-width: 750px) {
 
   .mat-drawer-container {
-    height: calc(100% - 60px);
+    height: calc(100% - 50px);
     background-color: #ECEEFE;
   }
 

@@ -167,7 +167,6 @@ export class ChannelService {
 
   populateChannelsAndMore(list: any) {
     let moreChannels: ChannelsNode[] = [];
-    console.log(this.currentUserId)
     list.forEach((element: any) => {
       const channelObj = this.setChannelObj(element.data(), element.id);
       const containsCurrentUser = channelObj.usersData.some((user: any) => user.id === this.currentUserId);

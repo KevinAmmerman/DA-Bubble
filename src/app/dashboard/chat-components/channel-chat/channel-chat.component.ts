@@ -107,7 +107,7 @@ export class ChannelChatComponent {
         this.channel = channelData;
         this.messageService.subMessage('channel', this.channelId);
         this.channelService.unsubChannel = this.channelService.subChannelContent(this.channelId, channelData => {
-          this.channel = channelData;     
+          this.channel = channelData;
           this.getUsersForDialog(channelData)
           this.isClosedChannel = this.channelService.getIsClosedChannel(this.channelId);
           setTimeout(() => this.scrollDown(), 1000);
@@ -152,10 +152,8 @@ export class ChannelChatComponent {
 
 
   scrollDown() {
-    if (this.level === '1') {
-      this.scrollElement = this.scrollElementRef?.nativeElement;
-      this.scrollElement.scrollTop = this.scrollElement.scrollHeight;
-    }
+    this.scrollElement = this.scrollElementRef?.nativeElement;
+    this.scrollElement.scrollTop = this.scrollElement.scrollHeight;
   }
 
 
