@@ -26,6 +26,11 @@ export class UserProfileEditComponent {
   currentPic = this.usersFbService.loggedInUserImg; //User current profile pic
   avatarPic: boolean = false;
   profileEditSuccess: boolean | null = null;
+  currentProfileSettings = {
+    currentPic: this.currentPic,
+    name: this.usersFbService.loggedInUserName,
+    email: this.usersFbService.loggedInUserEmail
+  }
 
 
   ngOnInit() {
@@ -58,11 +63,23 @@ export class UserProfileEditComponent {
     if (this.userEditForm.valid) {
       const formData = this.userEditForm.value;
       const currentUserID = this.usersFbService.getFromLocalStorage(); //von Localstorage currentuser Id rausholen
-      this.saveNewPic(this.currentPic, currentUserID);
-      this.changeEmailInFirebase(currentUserID, formData);
-      this.changeEmailInAuth(formData.email)
+      if (this.currentProfileSettings.currentPic !== this.currentPic) this.saveNewPic(this.currentPic, currentUserID);
+      if (this.currentProfileSettings.email !== formData.email) this.changeEmailData(currentUserID, formData);
+      if (this.currentProfileSettings.name !== formData.name) this.changeNameData(currentUserID, formData)
     }
     this.dialog.closeAll();
+  }
+
+
+  changeEmailData(currentUserID: string | null, formData: any) {
+    this.changeEmailInFirebase(currentUserID, formData);
+    this.changeEmailInAuth(formData.email)
+  }
+
+
+  changeNameData(currentUserID: string | null, formData: any) {
+    this.usersFbService.updateUserProfile(currentUserID!, formData)
+    this.notificationService.showSuccess('Namen erfolgreich aktualisiert.');
   }
 
 
@@ -106,7 +123,7 @@ export class UserProfileEditComponent {
   * @param {any} event - The file selection event.
   */
   onSelect(event: any) {
-    const file = new FileUpload(event.target.files[0]); 
+    const file = new FileUpload(event.target.files[0]);
     let fileType = file.file.type;
     let fileSize = file.file.size;
     if (fileSize > 500 * 1024) {
@@ -135,6 +152,7 @@ export class UserProfileEditComponent {
   */
   async saveNewPic(image: any, currentUserId: any) {
     this.usersFbService.saveUserPicFromDialog(image, this.avatarPic, currentUserId);
+    this.notificationService.showSuccess('Profilbild erfolgreich aktualisiert.');
   }
 
 
